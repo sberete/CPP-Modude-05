@@ -1,24 +1,32 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, uint8_t grade) : _name(name)
+int Bureaucrat::check(int const & src)
 {
     try
     {
-        if (grade < 1)
-            throw GradeTooHighException();
-        else if (grade > 150)
+        if (src < 1)
+            throw GradeTooHighException(); 
+        else if (src > 150)
             throw GradeTooLowException();
-        else
-            _grade = grade;
     }
     catch(const Bureaucrat::GradeTooHighException& e)
     {
         std::cerr << "Too high" << '\n';
+        return 1;
     }
     catch(const Bureaucrat::GradeTooLowException& e)
     {
         std::cerr << "Too Low" << '\n';
+        return 1;
     }
+    return 0;
+}
+
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
+{
+    if (check(grade))
+        return ;
+    _grade = grade;
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const & src)
@@ -48,10 +56,18 @@ std::string const & Bureaucrat::getName() const
 
 void Bureaucrat::increment()
 {
-    _grade--;
+    int tmp = _grade - 1;
+    
+    if (!check(tmp))
+        _grade = tmp;
+
 }
 
 void Bureaucrat::decrement()
 {
-    _grade++;
+    int tmp = _grade + 1;
+
+    if (!check(tmp))
+        _grade = tmp;
+
 }

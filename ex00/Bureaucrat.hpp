@@ -9,7 +9,7 @@
 class Bureaucrat
 {
     public:
-        Bureaucrat(std::string, uint8_t);
+        Bureaucrat(std::string, int);
         Bureaucrat(Bureaucrat const &);
         ~Bureaucrat();
 
@@ -25,7 +25,8 @@ class Bureaucrat
 
     private:
         std::string _name;
-        uint8_t _grade;
+        int _grade;
+        int check(int const &);
         Bureaucrat();
 };
 
