@@ -2,21 +2,32 @@
 
 int main()
 {
-    Bureaucrat pn = Bureaucrat("Pierre", 3);
+    try
+    {
+        Bureaucrat a("Pierre", 3);
+        a.increment();
+        std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
+        a.increment();
+        std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 
-    std::cout << pn.getName() << ", bureaucrat grade " << pn.getGrade() << std::endl;
-    pn.decrement();
-    std::cout << pn.getName() << ", bureaucrat grade " << pn.getGrade() << std::endl;
-    pn.increment();
-    std::cout << pn.getName() << ", bureaucrat grade " << pn.getGrade() << std::endl;
+    try
+    {
+        Bureaucrat a("Pierre", 800);
+        a.increment();
+        std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
+        a.increment();
+        std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
+        a.increment();
+        std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
 
-    pn.increment();
-    std::cout << pn.getName() << ", bureaucrat grade " << pn.getGrade() << std::endl;
-
-    pn.increment();
-    std::cout << pn.getName() << ", bureaucrat grade " << pn.getGrade() << std::endl;
-
-    pn.increment();
-    std::cout << pn.getName() << ", bureaucrat grade " << pn.getGrade() << std::endl;
-
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }

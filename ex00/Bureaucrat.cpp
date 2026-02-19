@@ -1,32 +1,10 @@
 #include "Bureaucrat.hpp"
 
-int Bureaucrat::check(int const & src)
-{
-    try
-    {
-        if (src < 1)
-            throw GradeTooHighException(); 
-        else if (src > 150)
-            throw GradeTooLowException();
-    }
-    catch(const Bureaucrat::GradeTooHighException& e)
-    {
-        std::cerr << "Too high" << '\n';
-        return 1;
-    }
-    catch(const Bureaucrat::GradeTooLowException& e)
-    {
-        std::cerr << "Too Low" << '\n';
-        return 1;
-    }
-    return 0;
-}
+Bureaucrat::Bureaucrat() {}
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
-    if (check(grade))
-        return ;
-    _grade = grade;
+    check(grade);
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const & src)
@@ -41,6 +19,8 @@ Bureaucrat & Bureaucrat::operator=(Bureaucrat const & rhs)
     _name = rhs._name;
     _grade = rhs._grade;
 
+    check(_grade);
+    
     return *this;
 }
 
@@ -54,20 +34,35 @@ std::string const & Bureaucrat::getName() const
     return _name;
 }
 
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return "Bureaucrat: grade too high";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return "Bureaucrat: grade too low";
+}
+
+
+void Bureaucrat::check(int const & src)
+{
+    if (src < 1)
+        throw GradeTooHighException(); 
+    else if (src > 150)
+        throw GradeTooLowException();
+}
+
 void Bureaucrat::increment()
 {
-    int tmp = _grade - 1;
-    
-    if (!check(tmp))
-        _grade = tmp;
+    check(_grade - 1);
+    _grade--;
 
 }
 
 void Bureaucrat::decrement()
 {
-    int tmp = _grade + 1;
+    check(_grade + 1);
 
-    if (!check(tmp))
-        _grade = tmp;
-
+    _grade++;
 }
