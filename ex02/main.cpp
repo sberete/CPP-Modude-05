@@ -5,12 +5,10 @@
 
 int main()
 {
-    // Création des bureaucrats
     Bureaucrat high("Alice", 1);    // super grade
     Bureaucrat mid("Bob", 50);      // moyen
     Bureaucrat low("Charlie", 150); // faible grade
 
-    // Création des formulaires
     AForm* forms[3];
     forms[0] = new ShrubberyCreationForm("garden");
     forms[1] = new RobotomyRequestForm("Marvin");
@@ -21,13 +19,11 @@ int main()
     bureaucrats[1] = &mid;
     bureaucrats[2] = &low;
 
-    // Test de chaque formulaire
     for (int i = 0; i < 3; ++i)
     {
         AForm* f = forms[i];
         std::cout << "\n=== Testing " << f->getName() << " ===\n";
         std::cout << *f << "\n";
-
         for (int j = 0; j < 3; ++j)
         {
             Bureaucrat* b = bureaucrats[j];
@@ -53,10 +49,8 @@ int main()
                 std::cerr << "Cannot execute: " << e.what() << "\n";
             }
         }
-
-        delete f; // libération mémoire
+        delete f;
     }
-
     std::cout << "\nAll tests finished.\n";
     return 0;
 }
