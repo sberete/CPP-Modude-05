@@ -18,15 +18,19 @@ ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm c
 void ShrubberyCreationForm::executeAction() const
 {
     std::ofstream file((_target + "_shrubbery").c_str());
-
+    if (!file)
+    {
+        std::cerr << "Cannot open file" << std::endl;
+        return;
+    }
     file <<
-"       _-_\n"
-"    /~~   ~~\\\n"
-" /~~         ~~\\\n"
-"{               }\n"
-" \\  _-     -_  /\n"
-"   ~  \\\\ //  ~\n"
-"_- -   | | _- _\n"
-"  _ -  | |   -_\n"
-"      // \\\\\n";
+        "       _-_\n"
+        "    /~~   ~~\\\n"
+        " /~~         ~~\\\n"
+        "{               }\n"
+        " \\  _-     -_  /\n"
+        "   ~  \\\\ //  ~\n"
+        "_- -   | | _- _\n"
+        "  _ -  | |   -_\n"
+        "      // \\\\\n";
 }

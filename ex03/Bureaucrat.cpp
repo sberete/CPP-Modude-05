@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() {}
 
@@ -7,17 +8,14 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
     check(grade);
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const & src)
-{
-    *this = src;
-}
+Bureaucrat::Bureaucrat(Bureaucrat const & src) : _name(src._name), _grade(src._grade) {}
 
 Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat & Bureaucrat::operator=(Bureaucrat const & rhs)
 {
-    _name = rhs._name;
-    _grade = rhs._grade;
+    if (this != &rhs)
+        _grade = rhs._grade;
 
     return *this;
 }
@@ -45,6 +43,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 std::ostream & operator<<(std::ostream & o, Bureaucrat const & rhs)
 {
     o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
+
     return o;
 }
 
@@ -58,15 +57,20 @@ void Bureaucrat::check(int const & src)
 
 void Bureaucrat::increment()
 {
-    if (_grade - 1 < 1)
-        throw GradeTooHighException(); 
+    // if (_grade - 1 < 1)
+    //     throw GradeTooHighException(); 
+    // else if (_grade - 1 > 150)
+    //     throw GradeTooLowException();
+    check(_grade - 1);
     _grade--;
 
 }
 
 void Bureaucrat::decrement()
 {
-    if (_grade + 1 > 150)
+    if (_grade + 1 < 1)
+        throw GradeTooHighException(); 
+    else if (_grade + 1 > 150)
         throw GradeTooLowException();
 
     _grade++;

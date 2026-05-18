@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -42,5 +41,6 @@ class Form
 
 };
 
+std::ostream & operator<<(std::ostream &, Form const &);
 
 #endif

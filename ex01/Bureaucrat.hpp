@@ -5,7 +5,7 @@
 #include <string>
 #include <stdexcept>
 #include <stdint.h>
-#include "Form.hpp"
+
 class Form;
 
 class Bureaucrat
@@ -37,7 +37,7 @@ class Bureaucrat
 
 
     private:
-        std::string _name;
+        const std::string _name;
         int _grade;
         void check(int const &);
         Bureaucrat();

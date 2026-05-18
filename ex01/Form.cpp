@@ -1,4 +1,5 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form(std::string const & name, int gradeToSign, int gradeToExecute)
     : _name(name),
@@ -63,4 +64,11 @@ void Form::beSigned(Bureaucrat const & b)
     if (b.getGrade() > _gradeToSign)
         throw GradeTooLowException();
     _signed = true;
+}
+
+std::ostream & operator<<(std::ostream & o, Form const & rhs)
+{
+    o << rhs.getName() << ", form sign " << rhs.isSigned() << ", grade to sign " << rhs.getGradeToSign() << ", grade to execute " << rhs.getGradeToExecute();
+
+    return o;
 }

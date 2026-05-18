@@ -34,9 +34,9 @@ class Bureaucrat
 
 
     private:
-        std::string _name;
+        const std::string _name;
         int _grade;
-        void check(int const &);
+        void check(int const);
         Bureaucrat();
 };
 
